@@ -176,8 +176,8 @@ function App() {
           </button>
           <a
             className="icon-button"
-            href="https://github.com/adebolaowolabi32"
-            aria-label="Cynthia's GitHub"
+            href="https://github.com/adebolaowolabi32/relaydesk"
+            aria-label="RelayDesk source code"
           >
             <Code2 size={20} />
           </a>

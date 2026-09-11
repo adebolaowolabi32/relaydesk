@@ -71,7 +71,11 @@ test("mobile, keyboard map selection, dialogs and reduced motion", async ({
   const external: string[] = [];
   page.on("request", (r) => {
     if (
-      !r.url().startsWith("http://127.0.0.1:4177") &&
+      !r
+        .url()
+        .startsWith(
+          new URL(process.env.RELAYDESK_URL || "http://127.0.0.1:4177").origin,
+        ) &&
       !r.url().startsWith("data:")
     )
       external.push(r.url());
@@ -86,7 +90,12 @@ test("mobile, keyboard map selection, dialogs and reduced motion", async ({
   await page
     .getByRole("button", { name: "Pause simulation", exact: true })
     .click();
-  await page.screenshot({ path: "docs/desktop.png", fullPage: true });
+  await page.screenshot({
+    path: process.env.RELAYDESK_URL
+      ? "test-results/public-desktop.png"
+      : "docs/desktop.png",
+    fullPage: true,
+  });
   const node = page.getByRole("button", { name: "Virginia cache, online" });
   await node.focus();
   await page.keyboard.press("Enter");
@@ -96,7 +105,12 @@ test("mobile, keyboard map selection, dialogs and reduced motion", async ({
   await page.getByRole("button", { name: "Zoom in", exact: true }).click();
   await page.getByRole("button", { name: "Reset network view" }).click();
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.screenshot({ path: "docs/mobile.png", fullPage: true });
+  await page.screenshot({
+    path: process.env.RELAYDESK_URL
+      ? "test-results/public-mobile.png"
+      : "docs/mobile.png",
+    fullPage: true,
+  });
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -113,6 +127,10 @@ test("local lab submits actual jobs and deduplicates the same release", async ({
 }) => {
   await page.goto("");
   await page.getByRole("button", { name: "Local engine", exact: true }).click();
+  test.skip(
+    !!process.env.RELAYDESK_URL,
+    "Real local engine is tested in CI, not hosted on Pages.",
+  );
   await page.getByRole("button", { name: "Connect local engine" }).click();
   await expect(
     page.getByRole("heading", { name: "Worker activity" }),
@@ -159,4 +177,25 @@ test("1000-client mission completes with Frankfurt remaining offline", async ({
   await expect(
     page.getByRole("button", { name: "Frankfurt cache, offline" }),
   ).toBeVisible();
+});
+
+test("hosted preview explains local lab and makes no engine requests", async ({
+  page,
+}) => {
+  test.skip(!process.env.RELAYDESK_URL, "Hosted preview only");
+  const requests: string[] = [];
+  page.on("request", (r) => {
+    if (r.url().includes("127.0.0.1:3012")) requests.push(r.url());
+  });
+  await page.goto("");
+  await page.getByRole("button", { name: "Local engine", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Connect local engine" }),
+  ).toBeDisabled();
+  await expect(
+    page.getByText("Available when you run this project locally.", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  expect(requests).toEqual([]);
 });

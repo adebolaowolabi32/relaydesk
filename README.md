@@ -2,6 +2,8 @@
 
 **Delivery, under pressure.** A distributed-systems playground by Cynthia Owolabi.
 
+[**Play the interactive demo →**](https://adebolaowolabi32.github.io/relaydesk/) · [Source code](https://github.com/adebolaowolabi32/relaydesk)
+
 Ship a release to 1,000 simulated clients, take a region offline, inject corrupted packages, and keep deliveries moving. A separate local engine runs real HTTP transfers through concurrent Node.js workers and verifies each artifact before publishing it to disk.
 
 ![RelayDesk network workspace](docs/desktop.png)
@@ -104,6 +106,6 @@ npm run build
 npm run preview
 ```
 
-Open http://localhost:4177/relaydesk/. The static base path is `/relaydesk/` in `vite.config.ts`. GitHub CI and a manually triggered Pages workflow are included. This local project has not yet been published or deployed.
+Open http://localhost:4177/relaydesk/. The static base path is `/relaydesk/` in `vite.config.ts`. GitHub CI and a manually triggered Pages workflow are included. The Pages preview runs the browser simulation; the real engine runs locally using the instructions above.
 
 See [architecture](docs/ARCHITECTURE.md) and [local API](docs/API.md).
