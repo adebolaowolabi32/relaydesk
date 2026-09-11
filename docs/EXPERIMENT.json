@@ -1,0 +1,28 @@
+{
+  "scenario": "Frankfurt offline at second 15; 1000 seeded arrivals; four workers per cache; 240 simulation seconds",
+  "seed": 42,
+  "units": {
+    "latency": "simulation seconds, including queueing, successful requests only",
+    "credits": "fictional compute/transfer model units, not cloud prices"
+  },
+  "results": [
+    {
+      "failover": false,
+      "delivered": 691,
+      "failed": 309,
+      "pending": 0,
+      "p95": 99.2,
+      "credits": 16.374,
+      "retries": 927
+    },
+    {
+      "failover": true,
+      "delivered": 908,
+      "failed": 0,
+      "pending": 92,
+      "p95": 193.2,
+      "credits": 49.54,
+      "retries": 4
+    }
+  ]
+}
