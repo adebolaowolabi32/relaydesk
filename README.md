@@ -109,3 +109,9 @@ npm run preview
 Open http://localhost:4177/relaydesk/. The static base path is `/relaydesk/` in `vite.config.ts`. GitHub CI and a manually triggered Pages workflow are included. The Pages preview runs the browser simulation; the real engine runs locally using the instructions above.
 
 See [architecture](docs/ARCHITECTURE.md) and [local API](docs/API.md).
+
+## Author
+
+[Cynthia Owolabi](https://github.com/adebolaowolabi32), Senior Full Stack Engineer with experience across backend, frontend, platforms and applied AI.
+
+[Portfolio and experience](https://adebolaowolabi32.github.io/) · [Current CVs](https://adebolaowolabi32.github.io/resume.html)
