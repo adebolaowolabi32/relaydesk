@@ -1,14 +1,16 @@
 # RelayDesk
 
-**Delivery, under pressure.** A distributed-systems playground by Cynthia Owolabi.
+A release-delivery simulation with a separate local worker engine.
 
 [**Play the interactive demo →**](https://adebolaowolabi32.github.io/relaydesk/) · [Source code](https://github.com/adebolaowolabi32/relaydesk)
 
-Ship a release to 1,000 simulated clients, take a region offline, inject corrupted packages, and keep deliveries moving. A separate local engine runs real HTTP transfers through concurrent Node.js workers and verifies each artifact before publishing it to disk.
+Start a release for 1,000 simulated clients, then take a region offline. You can watch the remaining caches pick up the work and compare routing policies under the same demand.
+
+I also built a local engine that transfers files over HTTP. Its Node.js workers check each file before writing it to disk, and unfinished jobs can recover after a worker stops.
 
 ![RelayDesk network workspace](docs/desktop.png)
 
-Inspired by my work on artifact distribution, cloud migration and distributed applications. All geography, workloads, artifacts and scenarios are original synthetic fixtures; no employer code or private data is included.
+My work on artifact distribution at Indeed informed this project. The code and scenarios are my own, and all workloads use fictional data.
 
 ## Run the playground
 
@@ -83,7 +85,7 @@ This regenerates [docs/EXPERIMENT.json](docs/EXPERIMENT.json). With seed 42, 1,0
 | Pinned to home cache |       691 |    309 |             0 |                   99.2s |
 | Automatic failover   |       908 |      0 |            92 |                  193.2s |
 
-Failover preserves clients but increases queueing on the surviving capacity. The pinned strategy's lower successful-request latency excludes its 309 failures. These results describe this model, not measured cloud performance.
+With failover, fewer requests fail and more wait in the remaining caches’ queues. The pinned strategy's lower successful-request latency excludes its 309 failures. These results describe this model, not measured cloud performance.
 
 Cost credits are **fictional comparison units**, calculated from online worker time, cross-region attempts and total attempts. They are not currency, a cloud price estimate, or an invoice.
 
@@ -112,6 +114,6 @@ See [architecture](docs/ARCHITECTURE.md) and [local API](docs/API.md).
 
 ## Author
 
-[Cynthia Owolabi](https://github.com/adebolaowolabi32), Senior Full Stack Engineer with experience across backend, frontend, platforms and applied AI.
+Built by [Cynthia Owolabi](https://github.com/adebolaowolabi32).
 
 [Portfolio and experience](https://adebolaowolabi32.github.io/) · [Current CVs](https://adebolaowolabi32.github.io/resume.html)

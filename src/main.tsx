@@ -187,12 +187,15 @@ function App() {
         <section className="page-heading">
           <div>
             <div className="eyebrow">
-              <span className="tiny-line" /> THE DISTRIBUTED SYSTEMS PLAYGROUND
+              <span className="tiny-line" /> RELEASE DELIVERY SIMULATION
             </div>
             <h1>
-              Delivery, under pressure<span>.</span>
+              What if a region goes offline<span>?</span>
             </h1>
-            <p>Ship a release. Break a region. Keep the packets moving.</p>
+            <p>
+              Take a cache offline during a release and see how deliveries
+              recover.
+            </p>
           </div>
           <div className="heading-aside">
             <span className="release-tag">
@@ -470,7 +473,7 @@ function App() {
             <section className="operations-row">
               <div className="policy-panel">
                 <div className="panel-heading">
-                  <h3>Shape the response</h3>
+                  <h3>Adjust capacity</h3>
                   <GitBranch size={16} />
                 </div>
                 <button
@@ -594,13 +597,10 @@ function App() {
         </div>
       )}
       {guide && (
-        <Dialog
-          title="Make resilience visible."
-          onClose={() => setGuide(false)}
-        >
+        <Dialog title="How to use RelayDesk" onClose={() => setGuide(false)}>
           <p>
-            RelayDesk is a playground for software delivery under failure. Every
-            moving packet represents a simulated client transfer.
+            Each moving packet represents a simulated client transfer. You can
+            change the caches while a release is in progress.
           </p>
           <ol className="guide-list">
             <li>
@@ -743,7 +743,7 @@ function Experiments() {
         </span>
         <div>
           <span className="eyebrow">SAME REQUESTS. DIFFERENT DECISIONS.</span>
-          <h2>Replay the failure.</h2>
+          <h2>Compare routing policies</h2>
           <p>
             One release, 1,000 clients, Frankfurt offline at 15 seconds. Compare
             routing policies over 240 simulation seconds.
@@ -772,7 +772,7 @@ function Experiments() {
                 {on ? "ADAPTIVE" : "PINNED"}
               </span>
             </div>
-            <h3>{on ? "Find another way." : "Stay close to home."}</h3>
+            <h3>{on ? "Automatic failover" : "Pinned to home cache"}</h3>
             <p>
               {on
                 ? "Healthy caches can serve clients from any region. Failed transfers retry elsewhere."
