@@ -1,6 +1,6 @@
 # Architecture and limits
 
-RelayDesk has two independently testable execution paths: a deterministic browser model and an actual local artifact-delivery lab. Their visual and engineering evidence is deliberately labeled separately.
+RelayDesk has a browser simulation and a separate Node.js engine that transfers files over HTTP. They run different workloads: the browser models regional outages, while the local engine tests file verification and worker recovery.
 
 ## Browser model
 
