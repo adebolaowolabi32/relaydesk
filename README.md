@@ -23,7 +23,7 @@ npm run dev
 
 Open **http://localhost:5177/relaydesk/**.
 
-The Network and Experiments workspaces require no API key, database service or cloud account. Fonts are bundled locally. Refresh starts a new simulation.
+The Network and Experiments workspaces run entirely in the browser. Fonts are bundled locally. Refresh starts a new simulation.
 
 ## Try the mission
 
@@ -46,9 +46,9 @@ npm run engine
 
 Open **Local engine** in the app, then **Connect local engine**. For a failure demonstration, take the EU cache offline and corrupt the US package **before** submitting 24 deliveries. Refresh to watch them finish through the clean AP cache.
 
-The engine listens on **127.0.0.1:3012**; local HTTP cache fixtures listen on **127.0.0.1:3013**. These are three simulated regional endpoints on one machine, not real cloud regions. No external network requests or paid services are needed.
+The engine listens on **127.0.0.1:3012**; local HTTP cache fixtures listen on **127.0.0.1:3013**. Three endpoints on one machine simulate the regional caches. Transfers use local HTTP fixtures.
 
-On a remote VM, forward **5177** and **3012** over SSH or your editor's port forwarding and open the localhost URL. Port 3013 is only needed by workers on that VM. The hosted static preview intentionally cannot connect to the local engine.
+On a remote VM, forward **5177** and **3012** over SSH or your editor's port forwarding and open the localhost URL. Port 3013 is only needed by workers on that VM. Local engine connections are available when running the app on localhost.
 
 The engine stores its queue and attempts in `data/local-engine/queue.sqlite`. Verified bytes are stored by SHA-256 digest in `data/local-engine/artifacts/`. Multiple client jobs can reference the same artifact; content storage is shared, while each delivery's actual HTTP request is independently verified.
 
@@ -85,9 +85,9 @@ This regenerates [docs/EXPERIMENT.json](docs/EXPERIMENT.json). With seed 42, 1,0
 | Pinned to home cache |       691 |    309 |             0 |                   99.2s |
 | Automatic failover   |       908 |      0 |            92 |                  193.2s |
 
-With failover, fewer requests fail and more wait in the remaining caches’ queues. The pinned strategy's lower successful-request latency excludes its 309 failures. These results describe this model, not measured cloud performance.
+With failover, fewer requests fail and more wait in the remaining caches’ queues. The pinned strategy's lower successful-request latency excludes its 309 failures. These measurements come from the seeded simulation.
 
-Cost credits are **fictional comparison units**, calculated from online worker time, cross-region attempts and total attempts. They are not currency, a cloud price estimate, or an invoice.
+Cost credits are **fictional comparison units**, calculated from online worker time, cross-region attempts and total attempts. Use them to compare strategies within the simulation.
 
 ## Checks
 
